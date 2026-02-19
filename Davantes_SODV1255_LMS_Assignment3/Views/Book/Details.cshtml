@@ -1,0 +1,43 @@
+﻿@model Book
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Book Details";
+}
+
+<div class="details-container">
+
+    <h2 class="details-title">Book Details</h2>
+
+    <div class="details-grid">
+
+        <div class="details-label">Title</div>
+        <div class="details-value">@Model.Title</div>
+
+        <div class="details-label">Author</div>
+        <div class="details-value">@Model.Author</div>
+
+        <div class="details-label">Publisher</div>
+        <div class="details-value">@Model.Publisher</div>
+
+        <div class="details-label">Year Published</div>
+        <div class="details-value">@Model.YearPublished</div>
+
+        <div class="details-label">Available</div>
+        <div class="details-value">
+            @(Model.IsAvailable ? "Yes" : "No")
+        </div>
+
+    </div>
+
+    <div class="details-actions">
+        <a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-warning">
+            Edit
+        </a>
+
+        <a asp-action="Index" class="btn btn-success">
+            Back
+        </a>
+    </div>
+
+</div>

@@ -1,0 +1,38 @@
+﻿@model Borrowing
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Return Book";
+}
+
+<div class="delete-container">
+
+    <h2 class="delete-title">Return Book</h2>
+
+    <p class="delete-message">
+        Are you sure you want to return this book?
+    </p>
+
+    <div class="delete-item">
+        @ViewBag.BookTitle
+        <div style="margin-top: 1rem; font-size: 1.6rem; color: var(--gray-8);">
+            Borrowed by @ViewBag.ReaderName
+        </div>
+    </div>
+
+    <form asp-action="ReturnConfirmed"
+          asp-route-id="@Model.ID"
+          method="post"
+          class="delete-actions">
+
+        <button type="submit" class="btn btn-danger btn-large">
+            Confirm Return
+        </button>
+
+        <a asp-action="Index" class="btn btn-success btn-large">
+            Cancel
+        </a>
+
+    </form>
+
+</div>

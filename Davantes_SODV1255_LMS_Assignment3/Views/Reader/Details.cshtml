@@ -1,0 +1,93 @@
+﻿@model Reader
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Reader Details";
+}
+
+<div class="details-container">
+
+    <h2 class="details-title">Reader Details</h2>
+
+
+    <div class="details-grid">
+        <div class="details-label">First Name</div>
+        <div class="details-value">@Model.FirstName</div>
+
+        <div class="details-label">Last Name</div>
+        <div class="details-value">@Model.LastName</div>
+
+        <div class="details-label">Email</div>
+        <div class="details-value">@Model.Email</div>
+
+        <div class="details-label">Phone</div>
+        <div class="details-value">@Model.FormattedPhone</div>
+    </div>
+    <div class="details-actions details-actions-centered">
+        <a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-warning">Edit</a>
+        <a asp-action="Index" class="btn btn-success">Back</a>
+    </div>
+
+    @if (Model.Borrowings != null && Model.Borrowings.Count > 0) {
+        <div class="table-container">
+            <h2>Borrowing History</h2>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Book</th>
+                        <th>Borrowed</th>
+                        <th>Due</th>
+                        <th>Returned</th>
+                        <th>Status</th>
+                        <th class="actions">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var borrowing in Model.Borrowings) {
+                        var isOverdue =
+                        borrowing.ReturnDate == null &&
+                        DateTime.Now > borrowing.DueDate;
+
+                        <tr class="@(isOverdue ? "overdue-row" : "")">
+                            <td>
+                                @(BookRepository.GetBookById(borrowing.BookID)?.Title ?? "Unknown")
+                            </td>
+
+                            <td>@(borrowing.BorrowingDate.ToShortDateString())</td>
+                            <td>@(borrowing.DueDate.ToShortDateString())</td>
+
+                            <td>
+                                @(borrowing.ReturnDate != null
+                                                        ? borrowing.ReturnDate.Value.ToShortDateString()
+                                                        : "—")
+                            </td>
+
+                            <td>
+                                @if (borrowing.ReturnDate != null) {
+                                    <span class="status returned">Returned</span>
+                                } else if (isOverdue) {
+                                    <span class="status overdue">Overdue</span>
+                                } else {
+                                    <span class="status active">Borrowed</span>
+                                }
+                            </td>
+
+                            <td class="actions">
+                                <div class="table-actions-btn">
+                                    <a asp-controller="Borrowing"
+                                       asp-action="Details"
+                                       asp-route-id="@borrowing.ID"
+                                       class="btn btn-success">
+                                        View
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+</div>

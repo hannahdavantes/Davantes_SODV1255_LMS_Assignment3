@@ -1,0 +1,49 @@
+﻿@model Reader
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Edit Reader";
+}
+
+<div class="form-container">
+    <h2 class="form-title">Edit Reader</h2>
+
+    <form asp-action="Edit" asp-route-id="@Model.ID" method="post" class="form">
+
+        <input type="hidden" asp-for="ID" />
+
+        <div class="form-group">
+            <label asp-for="FirstName"></label>
+            <input asp-for="FirstName" class="input" />
+            <span asp-validation-for="FirstName"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="LastName"></label>
+            <input asp-for="LastName" class="input" />
+            <span asp-validation-for="LastName"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="input" />
+            <span asp-validation-for="Email"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Phone"></label>
+            <input asp-for="Phone" class="input" />
+            <span asp-validation-for="Phone"></span>
+
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            Update Reader
+        </button>
+
+        <a asp-action="Index" class="btn btn-danger">
+            Cancel
+        </a>
+
+    </form>
+</div>

@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+</head>
+<body>
+    <nav class="nav">
+        @{
+            var userId = Context.Session.GetInt32("UserId");
+            var fullName = Context.Session.GetString("UserFullName");
+            var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+            var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+        }
+
+        <ul>
+            @if (userId == null) {
+
+                <li>
+                    <a asp-controller="Home" asp-action="Index"
+                       class="@(currentController == "Home" && currentAction == "Index" ? "active" : "")">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a asp-controller="Home" asp-action="Login"
+                       class="@(currentAction == "Login" ? "active" : "")">
+                        Login
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Home" asp-action="Register"
+                       class="@(currentAction == "Register" ? "active" : "")">
+                        Register
+                    </a>
+                </li>
+            } else {
+                <li>
+                    <a asp-controller="Home" asp-action="Dashboard"
+                       class="@(currentAction == "Dashboard" ? "active" : "")">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Book" asp-action="Index"
+                       class="@(currentController == "Book" ? "active" : "")">
+                        Books
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Reader" asp-action="Index"
+                       class="@(currentController == "Reader" ? "active" : "")">
+                        Readers
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Borrowing" asp-action="Index"
+                       class="@(currentController == "Borrowing" ? "active" : "")">
+                        Borrowings
+                    </a>
+                </li>
+                <li class="nav-logout">
+                    <form asp-controller="Home" asp-action="Logout" method="post" style="margin:0;">
+                        <button type="submit" class="nav-btn">Logout</button>
+                    </form>
+                </li>
+
+            }
+        </ul>
+    </nav>
+    <main>
+        @RenderBody()
+    </main>
+</body>
+</html>

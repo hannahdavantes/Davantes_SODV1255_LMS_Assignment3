@@ -1,0 +1,73 @@
+﻿@model List<Book>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Books";
+}
+
+<div class="table-container">
+
+    <h2>Books</h2>
+
+    <div class="table-scroll">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Publisher</th>
+                    <th>Year</th>
+                    <th>Availability</th>
+                    <th class="actions">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model == null || Model.Count == 0) {
+                    <tr>
+                        <td colspan="6">No books available.</td>
+                    </tr>
+                } else {
+                    @foreach (var book in Model) {
+                        <tr>
+                            <td>@book.Title</td>
+                            <td>@book.Author</td>
+                            <td>@book.Publisher</td>
+                            <td>@book.YearPublished</td>
+                            <td>@(book.IsAvailable ? "Yes" : "No")</td>
+                            <td class="actions">
+                                <div class="table-actions-btn">
+                                    <a asp-action="Details"
+                                       asp-route-id="@book.ID"
+                                       class="btn btn-success">
+                                        Details
+                                    </a>
+
+                                    <a asp-action="Edit"
+                                       asp-route-id="@book.ID"
+                                       class="btn btn-warning">
+                                        Edit
+                                    </a>
+
+                                    <a asp-action="Delete"
+                                       asp-route-id="@book.ID"
+                                       class="btn btn-danger">
+                                        Delete
+                                    </a>
+
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-footer">
+        <a asp-action="Add" class="btn btn-success btn-large">
+            Add Book
+        </a>
+    </div>
+
+</div>

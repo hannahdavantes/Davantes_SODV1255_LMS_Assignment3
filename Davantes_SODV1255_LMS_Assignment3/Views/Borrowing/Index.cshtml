@@ -1,0 +1,85 @@
+﻿@model List<Borrowing>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Borrowings";
+
+    var bookTitles = ViewBag.BookTitles as Dictionary<int, string>;
+    var readerNames = ViewBag.ReaderNames as Dictionary<int, string>;
+}
+
+<div class="table-container">
+
+    <h2>Borrowings</h2>
+
+    <div class="table-scroll">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Book</th>
+                    <th>Reader</th>
+                    <th>Borrowed</th>
+                    <th>Due</th>
+                    <th>Status</th>
+                    <th class="actions">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model == null || Model.Count == 0) {
+                    <tr>
+                        <td colspan="6">No borrowings available.</td>
+                    </tr>
+                } else {
+                    @foreach (var b in Model) {
+
+                        var isOverdue = b.Status == "Overdue";
+                        var isReturned = b.Status == "Returned";
+
+                        <tr class="@(isOverdue ? "overdue-row" : "")">
+
+                            <td>@bookTitles[b.BookID]</td>
+                            <td>@readerNames[b.ReaderID]</td>
+                            <td>@b.BorrowingDate.ToString("yyyy-MM-dd")</td>
+                            <td>@b.DueDate.ToString("yyyy-MM-dd")</td>
+                            <td>@b.Status</td>
+
+                            <td class="actions">
+                                <div class="table-actions-btn">
+
+                                    <a asp-action="Details"
+                                       asp-route-id="@b.ID"
+                                       class="btn btn-success">
+                                        Details
+                                    </a>
+
+                                    <a asp-action="Extend"
+                                       asp-route-id="@b.ID"
+                                       class="btn btn-warning @(isReturned ? "btn-disabled" : "")">
+                                        Extend
+                                    </a>
+
+                                    <a asp-action="Return"
+                                       asp-route-id="@b.ID"
+                                       class="btn btn-danger @(isReturned ? "btn-disabled" : "")">
+                                        Return
+                                    </a>
+
+
+                                </div>
+                            </td>
+
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-footer">
+        <a asp-action="Add" class="btn btn-success btn-large">
+            New Borrowing
+        </a>
+    </div>
+
+</div>

@@ -1,0 +1,54 @@
+﻿@model DashboardViewModel
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Dashboard";
+}
+
+<div class="table-container">
+
+    <h2>Dashboard</h2>
+
+    <p class="dashboard-welcome">
+        Welcome, <strong>@Model.UserFullName</strong>
+    </p>
+
+    <div class="landing-actions">
+        <a class="btn btn-warning" asp-controller="Book" asp-action="Index">Books</a>
+        <a class="btn btn-warning" asp-controller="Reader" asp-action="Index">Readers</a>
+        <a class="btn btn-warning" asp-controller="Borrowing" asp-action="Index">Borrowings</a>
+    </div>
+
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-label">Total Books</div>
+            <div class="stat-value">@Model.TotalBooks</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-label">Available Books</div>
+            <div class="stat-value">@Model.AvailableBooks</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-label">Borrowed Books</div>
+            <div class="stat-value">@Model.BorrowedBooks</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-label">Total Readers</div>
+            <div class="stat-value">@Model.TotalReaders</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-label">Active Borrowings</div>
+            <div class="stat-value">@Model.ActiveBorrowings</div>
+        </div>
+
+        <div class="stat-card stat-card-danger">
+            <div class="stat-label">Overdue Borrowings</div>
+            <div class="stat-value">@Model.OverdueBorrowings</div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,38 @@
+﻿@model Borrowing
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Extend Borrowing";
+}
+
+<div class="delete-container">
+
+    <h2 class="delete-title">Extend Borrowing</h2>
+
+    <p class="delete-message">
+        Extend due date by 7 days?
+    </p>
+
+    <div class="delete-item">
+        @ViewBag.BookTitle
+        <div style="margin-top: 1rem; font-size: 1.6rem; color: var(--gray-8);">
+            Current Due: @Model.DueDate.ToString("yyyy-MM-dd")
+        </div>
+    </div>
+
+    <form asp-action="ExtendConfirmed"
+          asp-route-id="@Model.ID"
+          method="post"
+          class="delete-actions">
+
+        <button type="submit" class="btn btn-warning btn-large">
+            Confirm Extend
+        </button>
+
+        <a asp-action="Index" class="btn btn-success btn-large">
+            Cancel
+        </a>
+
+    </form>
+
+</div>

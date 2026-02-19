@@ -1,0 +1,35 @@
+﻿@model Book
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Delete Book";
+}
+
+<div class="delete-container">
+
+    <h2 class="delete-title">Delete Book</h2>
+
+    <p class="delete-message">
+        Are you sure you want to delete this book?
+    </p>
+
+    <div class="delete-item">
+        @Model.Title
+    </div>
+
+    <form asp-action="DeleteConfirmed"
+          asp-route-id="@Model.ID"
+          method="post"
+          class="delete-actions">
+
+        <button type="submit" class="btn btn-danger btn-large">
+            Confirm Delete
+        </button>
+
+        <a asp-action="Index" class="btn btn-success btn-large">
+            Cancel
+        </a>
+
+    </form>
+
+</div>

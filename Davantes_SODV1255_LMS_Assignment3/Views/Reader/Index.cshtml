@@ -1,0 +1,70 @@
+﻿@model List<Reader>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Readers";
+}
+
+<div class="table-container">
+
+    <h2>Readers</h2>
+
+    <div class="table-scroll">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th class="actions">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model == null || Model.Count == 0) {
+                    <tr>
+                        <td colspan="5">No readers available.</td>
+                    </tr>
+                } else {
+                    @foreach (var reader in Model) {
+                        <tr>
+                            <td>@reader.FirstName</td>
+                            <td>@reader.LastName</td>
+                            <td>@reader.Email</td>
+                            <td>@reader.FormattedPhone</td>
+                            <td class="actions">
+                                <div class="table-actions-btn">
+                                    <a asp-action="Details"
+                                       asp-route-id="@reader.ID"
+                                       class="btn btn-success">
+                                        Details
+                                    </a>
+
+                                    <a asp-action="Edit"
+                                       asp-route-id="@reader.ID"
+                                       class="btn btn-warning">
+                                        Edit
+                                    </a>
+
+                                    <a asp-action="Delete"
+                                       asp-route-id="@reader.ID"
+                                       class="btn btn-danger">
+                                        Delete
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-footer">
+        <a asp-action="Add" class="btn btn-success btn-large">
+            Add Reader
+        </a>
+    </div>
+
+</div>

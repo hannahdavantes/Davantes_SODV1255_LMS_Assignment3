@@ -1,0 +1,58 @@
+﻿@model Borrowing
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Borrowing Details";
+}
+
+<div class="details-container">
+
+    <h2 class="details-title">Borrowing Details</h2>
+
+    <div class="details-grid">
+
+        <div class="details-label">Book</div>
+        <div class="details-value">@ViewBag.BookTitle</div>
+
+        <div class="details-label">Reader</div>
+        <div class="details-value">@ViewBag.ReaderName</div>
+
+        <div class="details-label">Borrowing Date</div>
+        <div class="details-value">@Model.BorrowingDate.ToString("yyyy-MM-dd")</div>
+
+        <div class="details-label">Due Date</div>
+        <div class="details-value">@Model.DueDate.ToString("yyyy-MM-dd")</div>
+
+        <div class="details-label">Status</div>
+        <div class="details-value">@Model.Status</div>
+
+        @if (Model.ReturnDate != null) {
+            <div class="details-label">Return Date</div>
+            <div class="details-value">@Model.ReturnDate.Value.ToString("yyyy-MM-dd")</div>
+        }
+
+    </div>
+
+    <div class="details-actions">
+
+        @if (Model.Status == "Borrowed" || Model.Status == "Overdue") {
+            <a asp-action="Extend"
+               asp-route-id="@Model.ID"
+               class="btn btn-warning">
+                Extend
+            </a>
+
+            <a asp-action="Return"
+               asp-route-id="@Model.ID"
+               class="btn btn-danger">
+                Return
+            </a>
+        }
+
+        <a asp-action="Index" class="btn btn-success">
+            Back
+        </a>
+
+    </div>
+
+</div>

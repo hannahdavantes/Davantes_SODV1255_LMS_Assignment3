@@ -1,0 +1,52 @@
+﻿@model Book
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Edit Book";
+}
+
+<div class="form-container">
+    <h2 class="form-title">Edit Book</h2>
+
+    <form asp-action="Edit" asp-route-id="@Model.ID" method="post" class="form">
+
+        <input type="hidden" asp-for="ID" />
+
+        <div class="form-group">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="input" />
+            <span asp-validation-for="Title"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Author"></label>
+            <input asp-for="Author" class="input" />
+            <span asp-validation-for="Author"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Publisher"></label>
+            <input asp-for="Publisher" class="input" />
+            <span asp-validation-for="Publisher"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="YearPublished">Year Published</label>
+            <input asp-for="YearPublished" class="input" />
+            <span asp-validation-for="YearPublished"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="IsAvailable">Availability</label>
+            <input asp-for="IsAvailable" type="checkbox" />
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            Update Book
+        </button>
+        <a asp-action="Index" class="btn btn-danger">
+            Cancel
+        </a>
+
+    </form>
+</div>
