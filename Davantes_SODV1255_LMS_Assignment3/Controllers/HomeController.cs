@@ -76,6 +76,7 @@ namespace Davantes_SODV1255_LMS_Assignment3.Controllers {
             HttpContext.Session.SetInt32("UserId", savedUser.ID);
             HttpContext.Session.SetString("UserFullName", $"{savedUser.FirstName} {savedUser.LastName}");
 
+            TempData["Success"] = "Registration successful. You are now logged in.";
             return RedirectToAction("Dashboard");
         }
 

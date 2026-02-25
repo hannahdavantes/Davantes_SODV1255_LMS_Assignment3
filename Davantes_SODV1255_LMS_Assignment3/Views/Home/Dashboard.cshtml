@@ -8,7 +8,14 @@
 <div class="table-container">
 
     <h2>Dashboard</h2>
-
+    @if (TempData["Success"] != null) {
+        <div class="alert alert-success">
+            <div class="alert-text">
+                <span>@TempData["Success"]</span>
+            </div>
+            <button class="alert-close" onclick="this.parentElement.remove()">✕</button>
+        </div>
+    }
     <p class="dashboard-welcome">
         Welcome, <strong>@Model.UserFullName</strong>!
     </p>
