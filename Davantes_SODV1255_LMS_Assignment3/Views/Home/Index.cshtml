@@ -5,6 +5,14 @@
 
 <div class="landing">
     <div class="landing-card">
+        @if (TempData["Success"] != null) {
+            <div class="alert alert-success">
+                <div class="alert-text">
+                    <span>@TempData["Success"]</span>
+                </div>
+                <button class="alert-close" onclick="this.parentElement.remove()">✕</button>
+            </div>
+        }
         <div class="landing-badge">Library Management System</div>
 
         <h1 class="landing-title">Welcome</h1>

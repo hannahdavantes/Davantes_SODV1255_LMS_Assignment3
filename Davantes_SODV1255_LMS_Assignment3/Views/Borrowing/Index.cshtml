@@ -9,7 +9,30 @@
 }
 
 <div class="table-container">
-
+    @if (TempData["Success"] != null) {
+        <div class="alert alert-success">
+            <div class="alert-text">
+                <span>@TempData["Success"]</span>
+            </div>
+            <button class="alert-close" onclick="this.parentElement.remove()">✕</button>
+        </div>
+    }
+    @if (TempData["Warn"] != null) {
+        <div class="alert alert-warn">
+            <div class="alert-text">
+                <span>@TempData["Warn"]</span>
+            </div>
+            <button class="alert-close" onclick="this.parentElement.remove()">✕</button>
+        </div>
+    }
+    @if (TempData["Danger"] != null) {
+        <div class="alert alert-danger">
+            <div class="alert-text">
+                <span>@TempData["Danger"]</span>
+            </div>
+            <button class="alert-close" onclick="this.parentElement.remove()">✕</button>
+        </div>
+    }
     <h2>Borrowings</h2>
 
     <div class="table-scroll">
