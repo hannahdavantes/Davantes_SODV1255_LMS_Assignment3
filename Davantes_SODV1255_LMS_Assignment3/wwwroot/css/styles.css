@@ -659,8 +659,6 @@ h2 {
     transition: opacity 0.2s ease;
     background: none;
     border: none;
-    color: inherit;
-    font: inherit;
 }
 
     .alert-close:hover {
